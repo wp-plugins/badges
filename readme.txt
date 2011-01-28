@@ -30,7 +30,24 @@ as well as
 
 == Frequently Asked Questions ==
 
+= Which naming convention is used for the badges =
+All badges needs to be named `XXname.inc`, where "XX" is a number (used to determine ordering) and the ".inc" is required.
+
+= What is the format of the "Badge" files? =
+You could view the included "demo" file: `00testbadge.inc`, but here's another, slightly simpler, example:
+
+    <!-- Support CC -->
+    <div id="badge-supportcc-inner" onclick="location.href='http://creativecommons.org';" style="cursor: pointer;">
+    <img width=88 height=31 border=0 alt="http://creativecommons.org" title="Support the Creative Commons!"
+        src="http://creativecommons.org/images/support/2010/cc-support.png"<br />
+        Support the Creative Commons!
+    </div>
+    <!-- /Support CC -->
+
 == Screenshots ==
+1. Configuring the widget to read badges from `damn-badges` and display them as "Badges".
+2. The default configuration of the widget, displaying the default path (badges).
+3. The first configuration as rendered by Chrome.
 
 == Changelog ==
 
