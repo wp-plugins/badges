@@ -39,7 +39,8 @@ You could view the included "demo" file: `00testbadge.inc`, but here's another, 
     <!-- Support CC -->
     <div id="badge-supportcc-inner" onclick="location.href='http://creativecommons.org';" style="cursor: pointer;">
     <img width=88 height=31 border=0 alt="http://creativecommons.org" title="Support the Creative Commons!"
-        src="http://creativecommons.org/images/support/2010/cc-support.png"<br />
+        src="http://creativecommons.org/images/support/2010/cc-support.png">
+    <br />
         Support the Creative Commons!
     </div>
     <!-- /Support CC -->
