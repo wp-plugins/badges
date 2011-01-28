@@ -45,24 +45,31 @@ class DisplayBadges extends WP_Widget {
 
             foreach (glob( "./" . $badgedir . "/[0-9][0-9]*.inc") as $filename) {
                 $fileid = preg_replace("/\.\/[\w-_]+\/\d+(.+)\.inc/", "\$1", $filename); // Extract the base name... and mind the leading ./
-                print("    <li class=\"badge\">\n");
-                if ( $internalcss ) {
-                    print( "<ul style='list-style: none; display: block; text-align: center; border: 1px solid; " );
-                    print( "-moz-border-radius: 1em; -webkit-border-radius: 1em; -khtml-border-radius: 1em; border-radius: 1em; " );
+
+                print("\t<li class=\"badge\">\n");
+                print( "\t\t<ul " );
+                if ( $internalcss || $dropshadow  ) {
+                    print( "style='" );
+                    if ( $internalcss ) {
+                        print( "list-style: none; display: block; text-align: center; border: 1px solid; " );
+                        print( "-moz-border-radius: 1em; -webkit-border-radius: 1em; -khtml-border-radius: 1em; border-radius: 1em; " );
+                        print( "width: auto; margin: 1em; padding: 2ex; " );
+                    }
                     if ( $dropshadow ) {
                         print( "-moz-box-shadow: #CCC 5px 5px 5px; -webkit-box-shadow: #CCC 5px 5px 5px; ");
                         print( "-khtml-box-shadow: #CCC 5px 5px 5px; box-shadow: #CCC 5px 5px 5px; ");
                     }
-                    print( "width: auto; margin: 1em; padding: 2ex;' id='badge-$fileid'><li>\n" );
-                } else {
-                    print( "<ul id='badge-$fileid'><li>\n" );
+                    print( "' " );
                 }
+                print( "id='badge-$fileid'>\n\t\t\t<li>\n" );
+
                 $badgearray = file($filename); 
                 foreach ($badgearray as $badge) {
                     $badge = str_replace("[BLOGURL]", get_settings('home'), $badge);
                     print("$badge");
                 }
-                print("        </li></ul> <!-- #badge-$fileid -->\n");
+
+                print("\t\t\t</li>\n\t\t</ul> <!-- #badge-$fileid -->\n\t</li>\n");
             }
 
             echo $after_widget;
