@@ -22,12 +22,14 @@ as well as
 
 == Installation ==
 **Install**
+
 1. Unzip the `badges.zip` file. 
 1. Upload `badges.php` to the `/wp-content/plugins/` directory.
 1. Activate the plugin through the 'Plugins' menu in WordPress.
 1. Use the "Badges" widget.
 
 **Upgrade**
+
 1. Follow your normal installtion process
 1. Open the Widget Control Panel for "Badges" and confirm settings.
 1. Sit back and enjoy...
