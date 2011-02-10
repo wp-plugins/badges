@@ -3,7 +3,7 @@ Contributors: eroux
 Tags: books, read, reading, admin, administration, jadb
 Requires at least: 2.8
 Tested up to: 3.0.4
-Stable tag: 1.0.0
+Stable tag: 2.2
 
 Display a set of badges based on files in a directory off the root of the blog.
 
@@ -21,6 +21,7 @@ as well as
 1. define the directory of the badges.
 
 == Installation ==
+
 **Install**
 
 1. Unzip the `badges.zip` file. 
@@ -37,30 +38,45 @@ as well as
 == Frequently Asked Questions ==
 
 = Which naming convention is used for the badges =
+
 All badges needs to be named `XXname.inc`, where "XX" is a number (used to determine ordering) and the ".inc" is required.
 
 = What is the format of the "Badge" files? =
+
 You could view the included "demo" file: `00testbadge.inc`, but here's another, slightly simpler, example:
 
     <!-- Support CC -->
     <div id="badge-supportcc-inner" onclick="location.href='http://creativecommons.org';" style="cursor: pointer;">
-    <img width=88 height=31 border=0 alt="http://creativecommons.org" title="Support the Creative Commons!"
-        src="http://creativecommons.org/images/support/2010/cc-support.png">
+    <img width=88 height=31 alt="http://creativecommons.org" title="Support the Creative Commons!"
+        src="http://creativecommons.org/images/support/2010/cc-support.png" />
     <br />
         Support the Creative Commons!
     </div>
     <!-- /Support CC -->
 
 == Screenshots ==
+
 1. Configuring the widget to read badges from `damn-badges` and display them as "Badges".
 2. The default configuration of the widget, displaying the default path (badges).
-3. The first configuration as rendered by Chrome.
+3. Badges displyed Padded and Boxed, but with Drop-Shadows disabled.
 
 == Changelog ==
 
 = 1.0 =
+
 * Initial Public Release
 
 = 2.0 =
+
 * Cosmetic changes
 * Added (better) examples to the documentation
+
+= 2.1 =
+
+* Fixed the HTML generated to be cleaner and identify the badge class better
+* Simplified the examples slightly
+
+= 2.2 =
+
+* Moved to a '<div>' based layout instead of using Lists
+* Split Boxing and Padding into two separate options

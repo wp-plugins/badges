@@ -4,7 +4,7 @@
     Plugin URI: http://www.damn.org.za/blog/DisplayBadges
     Description: Display a set of Badges (named XXFoo.inc) within the widget
     Author: Eugéne Roux
-    Version: 2
+    Version: 2.2
     Author URI: http://damn.org.za/
  */
 
@@ -21,6 +21,7 @@ class DisplayBadges extends WP_Widget {
         $this->widget_defaults = array(
             'internalcss' => true,
             'dropshadow' => false,
+            'displayframe' => true,
             'path' => 'badges',
         );
 
@@ -33,8 +34,9 @@ class DisplayBadges extends WP_Widget {
         extract( $args );
         $title = apply_filters('widget_title', $instance['title']);
         $badgedir = $instance['path'];
-        $internalcss = $instance["internalcss"] ? true : false;
         $dropshadow = $instance["dropshadow"] ? true : false;
+        $internalcss = $instance["internalcss"] ? true : false;
+        $displayframe = $instance["displayframe"] ? true : false;
 
         if (is_dir( "./" . $badgedir )) {
 
@@ -43,17 +45,21 @@ class DisplayBadges extends WP_Widget {
             if ( $title )
                 echo $before_title . $title . $after_title; // This way we get to choose a "No Title" scenario...
 
+            print( "\n\t<div class='badge' id='badge-" . $badgedir . "'>\n" );
+
             foreach (glob( "./" . $badgedir . "/[0-9][0-9]*.inc") as $filename) {
                 $fileid = preg_replace("/\.\/[\w-_]+\/\d+(.+)\.inc/", "\$1", $filename); // Extract the base name... and mind the leading ./
 
-                print("\t<li class=\"badge\">\n");
-                print( "\t\t<ul " );
-                if ( $internalcss || $dropshadow  ) {
+                print( "\n\t\t<div \n" );
+
+                if ( $internalcss || $displayframe || $dropshadow  ) {
                     print( "style='" );
                     if ( $internalcss ) {
-                        print( "list-style: none; display: block; text-align: center; border: 1px solid; " );
+                        print( "display: block; text-align: center; width: auto; margin: 1em; padding: 2ex; " );
+                    }
+                    if ( $displayframe ) {
+                        print( "border: 1px solid; " );
                         print( "-moz-border-radius: 1em; -webkit-border-radius: 1em; -khtml-border-radius: 1em; border-radius: 1em; " );
-                        print( "width: auto; margin: 1em; padding: 2ex; " );
                     }
                     if ( $dropshadow ) {
                         print( "-moz-box-shadow: #CCC 5px 5px 5px; -webkit-box-shadow: #CCC 5px 5px 5px; ");
@@ -61,7 +67,8 @@ class DisplayBadges extends WP_Widget {
                     }
                     print( "' " );
                 }
-                print( "id='badge-$fileid'>\n\t\t\t<li>\n" );
+
+                print( "class='badge' id='badge-" . $badgedir . "-" . $fileid . "'>\n" );
 
                 $badgearray = file($filename); 
                 foreach ($badgearray as $badge) {
@@ -69,9 +76,10 @@ class DisplayBadges extends WP_Widget {
                     print("$badge");
                 }
 
-                print("\t\t\t</li>\n\t\t</ul> <!-- #badge-$fileid -->\n\t</li>\n");
+                print( "\t\t</div>\n" );
             }
 
+            print( "\t</div><!-- #badge-" . $badgedir . " -->\n" );
             echo $after_widget;
         }
     }
@@ -83,6 +91,7 @@ class DisplayBadges extends WP_Widget {
         $instance = $old_instance;
         $instance['title'] = strip_tags( $new_instance['title'] );
         $instance['path'] = $new_instance['path'];
+        $instance['displayframe'] = ( isset( $new_instance['displayframe'] ) ? 1 : 0 );
         $instance['internalcss'] = ( isset( $new_instance['internalcss'] ) ? 1 : 0 );
         $instance['dropshadow'] = ( isset( $new_instance['dropshadow'] ) ? 1 : 0 );
         return $instance;
@@ -97,6 +106,7 @@ class DisplayBadges extends WP_Widget {
 
         $title = esc_attr( $instance['title'] );
         $path = $instance['path'];
+        $displayframe = $instance['displayframe'] ? "checked='checked'" : "";        
         $internalcss = $instance['internalcss'] ? "checked='checked'" : "";        
         $dropshadow = $instance['dropshadow'] ? "checked='checked'" : "";        
 
@@ -109,7 +119,12 @@ class DisplayBadges extends WP_Widget {
         print( "\t<p>\n" );
         print( "\t\t<input class='checkbox' type='checkbox' " . $internalcss );
         print( " id='" . $this->get_field_id("internalcss") . "' name='" . $this->get_field_name("internalcss") . "'/>\n" );
-        print( "\t\t<label for='" . $this->get_field_id("internalcss") . "'>" ); _e( "Display Badge in a Box" );
+        print( "\t\t<label for='" . $this->get_field_id("internalcss") . "'>" ); _e( "Pad the Badge Display" );
+        print( "</label>\n" );
+        print( "\t\t<br />\n" );
+        print( "\t\t<input class='checkbox' type='checkbox' " . $displayframe );
+        print( " id='" . $this->get_field_id("displayframe") . "' name='" . $this->get_field_name("displayframe") . "'/>\n" );
+        print( "\t\t<label for='" . $this->get_field_id("displayframe") . "'>" ); _e( "Display Badge in a Box" );
         print( "</label>\n" );
         print( "\t\t<br />\n" );
         print( "\t\t<input class='checkbox' type='checkbox' " . $dropshadow );
