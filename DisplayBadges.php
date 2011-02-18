@@ -45,12 +45,12 @@ class DisplayBadges extends WP_Widget {
             if ( $title )
                 echo $before_title . $title . $after_title; // This way we get to choose a "No Title" scenario...
 
-            print( "\n\t<div class='badge' id='badge-" . $badgedir . "'>\n" );
+            print( "\n\t<div class='badgegroup' id='badge-" . $badgedir . "'>\n" );
 
             foreach (glob( "./" . $badgedir . "/[0-9][0-9]*.inc") as $filename) {
                 $fileid = preg_replace("/\.\/[\w-_]+\/\d+(.+)\.inc/", "\$1", $filename); // Extract the base name... and mind the leading ./
 
-                print( "\n\t\t<div \n" );
+                print( "\n\t\t<div class='badge' id='badge-" . $badgedir . "-" . $fileid . "' " );
 
                 if ( $internalcss || $displayframe || $dropshadow  ) {
                     print( "style='" );
@@ -68,7 +68,7 @@ class DisplayBadges extends WP_Widget {
                     print( "' " );
                 }
 
-                print( "class='badge' id='badge-" . $badgedir . "-" . $fileid . "'>\n" );
+                print( ">\n" );
 
                 $badgearray = file($filename); 
                 foreach ($badgearray as $badge) {
