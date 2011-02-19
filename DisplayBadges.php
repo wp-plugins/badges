@@ -4,7 +4,7 @@
     Plugin URI: http://www.damn.org.za/blog/DisplayBadges
     Description: Display a set of Badges (named XXFoo.inc) within the widget
     Author: Eugéne Roux
-    Version: 2.2
+    Version: 2.3
     Author URI: http://damn.org.za/
  */
 
