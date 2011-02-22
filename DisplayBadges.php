@@ -1,7 +1,7 @@
 <?php
 /*
     Plugin Name: Display Badges
-    Plugin URI: http://www.damn.org.za/blog/DisplayBadges
+    Plugin URI: http://www.damn.org.za/blog/displaybadges
     Description: Display a set of Badges (named XXFoo.inc) within the widget
     Author: Eugéne Roux
     Version: 2.3
