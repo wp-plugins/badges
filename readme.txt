@@ -2,8 +2,8 @@
 Contributors: eroux
 Tags: books, read, reading, admin, administration, jadb
 Requires at least: 2.8
-Tested up to: 3.0.4
-Stable tag: 2.3
+Tested up to: 3.9
+Stable tag: trunk
 
 Display a set of badges based on files in a directory off the root of the blog.
 
