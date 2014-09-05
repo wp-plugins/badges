@@ -15,7 +15,7 @@ class DisplayBadges extends WP_Widget {
     //
     //  constructor
     //
-    function DisplayBadges() {
+    public function DisplayBadges() {
         $widget_ops = array( 'classname' => 'widget_badges', 'description' => __( "Display a set of Badges (named XXFoo.inc) within the widget. The path is specified as an offset from the Blog's base URL." ));
         $this->WP_Widget( 'badges', __( 'Badges', 'badges_widget' ), $widget_ops );
         $this->widget_defaults = array(
@@ -30,7 +30,7 @@ class DisplayBadges extends WP_Widget {
     //
     //  @see WP_Widget::widget
     //
-    function widget($args, $instance) {
+    public function widget($args, $instance) {
         extract( $args );
         $title = apply_filters('widget_title', $instance['title']);
         $badgedir = $instance['path'];
@@ -87,7 +87,7 @@ class DisplayBadges extends WP_Widget {
     //
     //  @see WP_Widget::update
     //
-    function update($new_instance, $old_instance) {
+    public function update($new_instance, $old_instance) {
         $instance = $old_instance;
         $instance['title'] = strip_tags( $new_instance['title'] );
         $instance['path'] = $new_instance['path'];
@@ -100,7 +100,7 @@ class DisplayBadges extends WP_Widget {
     //
     //  @see WP_Widget::form
     //
-    function form( $instance ) {
+    public function form( $instance ) {
         $instance = wp_parse_args( $instance, $this->widget_defaults );
         extract( $instance );
 
